@@ -1,0 +1,30 @@
+.cover {
+    width: 120px;
+    height: 180px;
+    cursor: pointer;
+}
+.info {
+    text-align: center;
+}
+#novel-list {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.novel {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
