@@ -1,3 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px -10px 30px 15px #aaa;
+    justify-content: space-between;
+    background-color: #bab;
+}
+
+header > h1 {
+    margin-left: 15px;
+    color: #fff;
+}
+
+header > nav {
+    margin-right: 20px;
+    width: 100px;
+    height: 100%;
+}
+
+header  ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+header  ul > li {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+main {
+    padding-top: 0px;
+    width: 100%;
+    height: 80vh;
+}
+
+#novels {
+    padding-top: 30px;
+    align-content: center;
+}
+
+#top {
+    width: 100%;
+    height: 40px;
+}
+
 .cover {
     width: 120px;
     height: 180px;
@@ -6,6 +61,7 @@
 .info {
     text-align: center;
 }
+
 #novel-list {
     display: flex;
     overflow-x: scroll;
