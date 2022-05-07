@@ -19,8 +19,8 @@ header > h1 {
 }
 
 header > nav {
-    margin-right: 20px;
-    width: 100px;
+    margin-right: 40px;
+    width: 300px;
     height: 100%;
 }
 
@@ -29,12 +29,31 @@ header  ul {
     height: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 header  ul > li {
     height: 100%;
     display: flex;
     align-items: center;
+}
+
+ul #search {
+    background-color: #ccc;
+    border-radius: 10px;
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+#search #search-input {
+    background: none;
+    border: 1px solid #fff;
+    border-width: 0 0 1px 0;
+}
+#search #search-input:focus {
+    outline: none;
 }
 
 main {
@@ -58,9 +77,6 @@ main {
     height: 180px;
     cursor: pointer;
 }
-.info {
-    text-align: center;
-}
 
 #novel-list {
     display: flex;
@@ -71,6 +87,14 @@ main {
     display: flex;
     flex-direction: column;
     margin: 0 20px;
+}
+
+.title, .author {
+    width: 120px;
+    padding-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 ::-webkit-scrollbar-thumb {

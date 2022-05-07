@@ -4,7 +4,7 @@ get('/novels').then(novels => {
     novels = Array(10).fill().map((_, i) => {
         return {
             id: ++i,
-            title: `Novel ${i}`,
+            title: `Novel ${i} 이내요헉슈ㅠㅠㅠ`,
             content: `Novel ${i} content`,
             author: 'babpool',
             cover: '/imgs/default-bookcover.png',

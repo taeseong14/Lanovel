@@ -27,11 +27,13 @@ app.post('/write', (req, res) => {
 
 app.get('/novels', (req, res) => res.send(novels));
 
-app.get('/novel/:id', (req, res) => {
+app.post('/novel/:id', (req, res) => {
     const { id } = req.params;
-    const novel = novels.find(novel => novel.id === Number(id));
-    res.send(novel);
+    const novel = novels.find(novel => novel.id === +id);
+    res.send(novel || {});
 });
+
+app.get('/viewer/:id', (req, res) => res.sendFile(__dirname + '/public/view/viewer.html'));
 
 const PORT = 6460;
 
