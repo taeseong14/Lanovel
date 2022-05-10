@@ -1,50 +1,37 @@
-/*
+console.log('██╗░░░░░░█████╗░███╗░░██╗░█████╗░██╗░░░██╗███████╗██╗░░░░░');
+console.log('██║░░░░░██╔══██╗████╗░██║██╔══██╗██║░░░██║██╔════╝██║░░░░░');
+console.log('██║░░░░░███████║██╔██╗██║██║░░██║╚██╗░██╔╝█████╗░░██║░░░░░');
+console.log('██║░░░░░██╔══██║██║╚████║██║░░██║░╚████╔╝░██╔══╝░░██║░░░░░');
+console.log('███████╗██║░░██║██║░╚███║╚█████╔╝░░╚██╔╝░░███████╗███████╗');
+console.log('╚══════╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░░░░╚═╝░░░╚══════╝╚══════╝');
 
-██╗░░░░░░█████╗░███╗░░██╗░█████╗░██╗░░░██╗███████╗██╗░░░░░
-██║░░░░░██╔══██╗████╗░██║██╔══██╗██║░░░██║██╔════╝██║░░░░░
-██║░░░░░███████║██╔██╗██║██║░░██║╚██╗░██╔╝█████╗░░██║░░░░░
-██║░░░░░██╔══██║██║╚████║██║░░██║░╚████╔╝░██╔══╝░░██║░░░░░
-███████╗██║░░██║██║░╚███║╚█████╔╝░░╚██╔╝░░███████╗███████╗
-╚══════╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░░░░╚═╝░░░╚══════╝╚══════╝
-*/
-
+require('dotenv').config();
 const express = require('express');
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('statics', {
+    extensions: [ 'html', 'htm' ]
+}));
 
-const novels = [];
+const Database = require('./src/Database');
 
-app.get('/', (req, res) => res.sendFile(__dirname + '/public/view/main.html'));
+// router to prevent overlap of ids
+app.post('/api/overlap', (req, res) => {
 
-app.get('/write', (req, res) => res.sendFile(__dirname + '/public/view/write.html'));
+    Database.GetUserById(req.body.id)
 
-app.post('/write', (req, res) => {
-    const { title, content } = req.body;
-    console.log(title, content);
-    novels.push({
-        id: novels.length + 1,
-        title,
-        content
-    });
-    res.send({
-        result: 'success',
-        novels
-    });
+    .then((error, row) => {
+        if (error) return res.json({  code: 500 });
+        return res.json({ code: 200, result: !row });
+    })
+    
+    .catch(() => res.json({ err: 500 }));
 });
 
-app.get('/novels', (req, res) => res.send(novels));
 
-app.post('/novel/:id', (req, res) => {
-    const { id } = req.params;
-    const novel = novels.find(novel => novel.id === +id);
-    res.send(novel || {});
+app.listen(process.env.PORT = process.env.PORT || 6460, () => {
+    console.log(`listening on port ${process.env.PORT}`);
 });
-
-app.get('/viewer/:id', (req, res) => res.sendFile(__dirname + '/public/view/viewer.html'));
-
-const PORT = 6460;
-
-app.listen(PORT, () => console.log(`listening on port ${PORT}`));
