@@ -1,4 +1,4 @@
-# novel
+# Lanovel
 
 소설올리는사이트?
 
