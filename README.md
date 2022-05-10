@@ -4,7 +4,7 @@
 
 # TODO
 
-[깃헙](bgh.kro.kr/Lanovel)
+[깃헙](http://bgh.kro.kr/Lanovel)
 
 ### 백엔드
 
