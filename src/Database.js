@@ -7,9 +7,9 @@ class Database extends sqlite3.Database {
 
         this.run(`
             CREATE TABLE IF NOT EXISTS USER (
-                uid integer primary key autoincrement,
-                id  string not null unique,
-                pw  string not null,
+                uid  integer primary key autoincrement,
+                id   string not null unique,
+                pw   string not null,
                 name string not null,
                 mail string not null,
                 desc string,
@@ -43,36 +43,60 @@ class Database extends sqlite3.Database {
 
         this.stmt = new Map();
 
-        this.stmt.set('user', this.prepare(`INSERT INTO USER (id, pw, name, mail) VALUES(?, ?, ?, ?)`));
-        this.stmt.set('nove', this.prepare(`INSERT INTO NOVE (wid, name, path) VALUES(?, ?, ?)`));
-        this.stmt.set('temp', this.prepare(`INSERT INTO TEMP (wid, name, path) VALUES(?, ?, ?)`));
+        this.stmt.set('user', this.prepare('INSERT INTO USER (id, pw, name, mail) VALUES(?, ?, ?, ?)'));
+        this.stmt.set('nove', this.prepare('INSERT INTO NOVE (wid, name, path) VALUES(?, ?, ?)'));
+        this.stmt.set('temp', this.prepare('INSERT INTO TEMP (wid, name, path) VALUES(?, ?, ?)'));
     }
 
-    async Get(query, args) {
-        return new Promise(resolve => {
-            this.get(query, args, resolve);
+    Get(query, args) {
+        return new Promise((resolve, reject) => {
+            this.get(query, args, (err, row) => {
+                err ? reject(err) : resolve(row);
+            });
         });
     }
 
-    async All(query, args) {
-        return new Promise(resolve => {
-            this.all(query, args, resolve);
+    All(query, args) {
+        return new Promise((resolve, reject) => {
+            this.all(query, args, (err, row) => {
+                err ? reject(err) : resolve(row);
+            });
         });
     }
     
-    async Insert(type, args) {
-        return new Promise((rsv, rjt) => {
+    Insert(type, args) {
+        return new Promise((resolve, reject) => {
             if (this.stmt.has(type))
-                this.stmt.get(type).run(args, rsv);
+                this.stmt.get(type).run(args, resolve);
             else
                 rjt('requested type does not exist');
         });
     }
 
-    async GetUserById(id) {
-        return this.Get('SELECT * FROM USER WHERE id = ?', id);
+    GetUserById(id) {
+        return new Promise((resolve, reject) => {
+            this.get('SELECT * FROM USER WHERE id = ?', id, (err, row) => {
+                err ? reject(err) : resolve(row);
+            });
+        });
+    }
+
+    GetLastNoveId() {
+        return new Promise((resolve, reject) => {
+            this.get('SELECT MAX(nid) as id FROM NOVE', (err, row) => {
+                err ? reject(err) : resolve(row.id);
+            });
+        });
+    }
+
+    GetLastTempId() {
+        return new Promise((resolve, reject) => {
+            this.get('SELECT MAX(nid) as id FROM TEMP', (err, row) => {
+                err ? reject(err) : resolve(row.id);
+            });
+        });
     }
 
 }
 
-module.exports = new Database('database.db');
+module.exports = Database;

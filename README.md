@@ -39,6 +39,10 @@
     - 받은 글을 DB에 저장 및 등록
     - ResponseType: JSON
 
+- POST 요청시마다 AccessToken 재발급
+
+- Novel Database 구조 바꾸기
+
 ### 프론트엔드
 
 - GET /
