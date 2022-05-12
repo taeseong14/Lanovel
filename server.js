@@ -42,7 +42,7 @@ app.post('/api/overlap', (req, res) => {
 });
 
 app.post('/api/isLogined', (req, res) => {
-
+    
 });
 
 app.post('/api/login', (req, res) => {
@@ -73,8 +73,18 @@ app.post('/api/login', (req, res) => {
     .catch(() => res.json({ status: 500, message: 'unexpected error occured' }));
 });
 
-app.post('/api/register', (req, res) => {
+app.post('/api/register', async (req, res) => {
 
+    const { id, pw, name } = req.body;
+
+    if (await Database.GetUserById(id))
+        return res.json({ status: 400, message: 'already existing id' });
+    
+    if (id.length < 4) return res.json({ status: 400, message: 'invalid id length' });
+    if (pw.length < 9) return res.json({ status: 400, message: 'invalid pw length' });
+    
+    await Database.Insert('user', [ id, pw, name ]);
+    res.json({ status: 200, message: 'success' });
 });
 
 app.post('/api/upload', (req, res) => {

@@ -43,7 +43,7 @@ class Database extends sqlite3.Database {
 
         this.stmt = new Map();
 
-        this.stmt.set('user', this.prepare('INSERT INTO USER (id, pw, name, mail) VALUES(?, ?, ?, ?)'));
+        this.stmt.set('user', this.prepare('INSERT INTO USER (id, pw, name) VALUES(?, ?, ?)'));
         this.stmt.set('nove', this.prepare('INSERT INTO NOVE (wid, name, path) VALUES(?, ?, ?)'));
         this.stmt.set('temp', this.prepare('INSERT INTO TEMP (wid, name, path) VALUES(?, ?, ?)'));
     }

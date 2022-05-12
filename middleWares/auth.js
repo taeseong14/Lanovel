@@ -6,6 +6,7 @@ module.exports = function(req, res, next) {
 
     try {
 
+        const { token } = req.headers.cookies;
         req.uid = jwt.verify(req.headers);
         return next();
 
