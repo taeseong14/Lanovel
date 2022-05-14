@@ -12,7 +12,7 @@
         <nav>
             <ul>
                 <li><a href="http://">ㅁ<!-- 검색아이콘 --></a></li>
-                <li id="search"><input type="text" id="search-input"></li>
+                <li id="search"><input type="search" id="search-input"></li>
                 <li><a href="http://">ㅁ<!-- 글쓰기아이콘 --></a></li>
                 <li><a href="http://">ㅁ<!-- 로그인아이콘 --></a></li>
             </ul>
@@ -21,10 +21,12 @@
     <main>
         <div id="editor">
             <div id="title">
-                <input type="text" id="title-input" placeholder="title">
+                <form>
+                    <input type="text" id="title-input" placeholder="title" autofocus>
+                </form>
             </div>
             <div id="content">
-                <div id="content-input" contenteditable="true"></div>
+                <div id="content-input" contenteditable="true" spellcheck="false"></div>
             </div>
         </div>
         <button id="submit">제출</button>

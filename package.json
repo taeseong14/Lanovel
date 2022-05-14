@@ -15,8 +15,10 @@
     "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.7.5",
-    "nodemon": "^2.0.16",
     "rand-token": "^1.0.1",
     "sqlite3": "^5.0.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }

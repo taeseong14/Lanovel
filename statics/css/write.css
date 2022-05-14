@@ -1,21 +1,46 @@
-#editor {
-    display: flex;
-    justify-content: center;
-}
-
-#title {
-    padding-top: 30px
-}
-
 #title-input {
+    width: 100%;
+    height: 30px;
+    padding: 0 10px;
     border: none;
-    outline: none;
-    background-color: rgb(218, 218, 218);
-    border-radius: 10px;
-    text-align: center;
-    transition: 1s;
+    border-radius: 5px;
+    background-color: #e3e3e3;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+#title-input:focus {
+    outline: 1px #aaa solid;
 }
 
-#title-input:focus {
-    outline: #aaa solid 1px;
+#content {
+    background-color: #eaeaea;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#content-input {
+    min-height: 250px;
+    box-sizing: border-box;
+}
+#content-input:focus {
+    outline: none;
+}
+#content-input:empty::before {
+    content: "내용을 입력해주세요.";
+    color: #777;
+    margin-top: 10px;
+}
+
+#submit {
+    width: 100px;
+    height: 30px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    margin-top: 30px;
+    background-color: #ccc;
+    cursor: pointer;
+}
+#submit:focus {
+    outline: 1px solid #777;
 }
