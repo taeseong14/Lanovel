@@ -1,3 +1,21 @@
-/*
-    추가예정
-*/
+#editor {
+    display: flex;
+    justify-content: center;
+}
+
+#title {
+    padding-top: 30px
+}
+
+#title-input {
+    border: none;
+    outline: none;
+    background-color: rgb(218, 218, 218);
+    border-radius: 10px;
+    text-align: center;
+    transition: 1s;
+}
+
+#title-input:focus {
+    outline: #aaa solid 1px;
+}

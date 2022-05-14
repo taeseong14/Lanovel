@@ -2,19 +2,34 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/write.css">
+    <link rel="stylesheet" href="./css/write.css">
+    <link rel="stylesheet" href="./css/header.css">
     <title>Lanovel 글쓰기</title>
 </head>
 <body>
-    <div id="title">
-        <input type="text" id="title-input" placeholder="title">
-    </div>
-    <div id="content">
-        <div id="content-input" contenteditable="true"></div>
-    </div>
-    <button id="submit">제출</button>
-    
-    <script src="/js/fetch.js"></script>
-    <script src="/js/write.js"></script>
+    <header>
+        <h1>Lanovel</h1>
+        <nav>
+            <ul>
+                <li><a href="http://">ㅁ<!-- 검색아이콘 --></a></li>
+                <li id="search"><input type="text" id="search-input"></li>
+                <li><a href="http://">ㅁ<!-- 글쓰기아이콘 --></a></li>
+                <li><a href="http://">ㅁ<!-- 로그인아이콘 --></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="editor">
+            <div id="title">
+                <input type="text" id="title-input" placeholder="title">
+            </div>
+            <div id="content">
+                <div id="content-input" contenteditable="true"></div>
+            </div>
+        </div>
+        <button id="submit">제출</button>
+    </main>
+    <script src="./js/fetch.js"></script>
+    <script src="./js/write.js"></script>
 </body>
 </html>
