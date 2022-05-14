@@ -8,35 +8,44 @@ class Database extends sqlite3.Database {
         this.run(`
             CREATE TABLE IF NOT EXISTS USER (
                 uid  integer primary key autoincrement,
-                id   string not null unique,
-                pw   string not null,
-                name string not null,
-                mail string not null,
-                desc string,
+                id   text not null unique,
+                pw   text not null,
+                name text not null,
+                mail text,
+                desc text,
                 createdAt timestamp default current_timestamp
             )
         `);
 
         this.run(`
             CREATE TABLE IF NOT EXISTS NOVE (
-                nid integer primary key autoincrement,
-                wid  integer not null,
-                name string not null,
-                path string not null,
-                desc string,
-                view integer DEFAULT 0,
+                nid  integer primary key autoincrement,
+                uid  integer not null,
+                name text not null,
+                desc text,
+                thum text,
                 createdAt timestamp default current_timestamp,
                 updatedAt timestamp default current_timestamp
             )
         `);
 
+        this.run(`CREATE TABLE IF NOT EXISTS EPIS (
+            eid  integer primary key autoincrement,
+            nid  integer not null,
+            name text not null,
+            path text not null,
+            desc text,
+            thum text,
+            createdAt timestamp default current_timestamp
+        )`);
+
         this.run(`
             CREATE TABLE IF NOT EXISTS TEMP (
-                nid integer primary key autoincrement,
-                wid integer not null,
-                name string not null,
-                path string not null,
-                desc string,
+                nid  integer primary key autoincrement,
+                uid  integer not null,
+                name text not null,
+                path text not null,
+                desc text,
                 createdAt timestamp default current_timestamp
             )
         `);
@@ -44,8 +53,9 @@ class Database extends sqlite3.Database {
         this.stmt = new Map();
 
         this.stmt.set('user', this.prepare('INSERT INTO USER (id, pw, name) VALUES(?, ?, ?)'));
-        this.stmt.set('nove', this.prepare('INSERT INTO NOVE (wid, name, path) VALUES(?, ?, ?)'));
-        this.stmt.set('temp', this.prepare('INSERT INTO TEMP (wid, name, path) VALUES(?, ?, ?)'));
+        this.stmt.set('nove', this.prepare('INSERT INTO NOVE (uid, name, desc, thum) VALUES(?, ?, ?, ?)'));
+        this.stmt.set('nove', this.prepare('INSERT INTO EPIS (nid, name, path, desc, thum) VALUES(?, ?, ?, ?, ?)'));
+        this.stmt.set('temp', this.prepare('INSERT INTO TEMP (uid, name, path, desc, thum) VALUES(?, ?, ?, ?, ?)'));
     }
 
     Get(query, args) {

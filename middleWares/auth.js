@@ -1,29 +1,25 @@
 const jwt = require('../src/jwt');
 
-module.exports = function(req, res, next) {
-    
-    if (req.method !== 'POST') return next();
+module.exports = async function(req, res, next) {
 
-    try {
+    const { token } = req.signedCookies;
 
-        const { token } = req.headers.cookies;
-        req.uid = jwt.verify(req.headers);
-        return next();
-
-    } catch(error) {
-
+   jwt.verify(token).then(id => {
+        req.id = id; next();
+   })
+    .catch(error => {
         if (error.name === 'TokenExpiredError') {
             return res.status(500).json({
                 code: 500,
-                message: '토큰이 만료되었습니다'
+                message: 'token expired'
             });
         }
 
         if (error.name === 'JsonWebTokenError') {
             return res.status(500).json({
                 code: 500,
-                message: '올바르지 않은 토큰입니다'
+                message: 'invalid token'
             });
         }
-    }
+   });
 };

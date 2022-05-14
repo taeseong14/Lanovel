@@ -1,35 +1,43 @@
-const randToken = require('rand-token');
 const jwt = require('jsonwebtoken');
 
 const { SECRET_KEY } = process.env;
 
 const options = {
     algorithm : "HS256",
-    expiresIn : "30m",
+    expiresIn : "1d",
     issuer : "lanovel"
 };
 
-const TOKEN_EXPIRED = -3;
-const TOKEN_INVALID = -2;
-
 class JWT {
 
-    static sign(uid) {
-        const result = {
-            accessToken: jwt.sign({ uid }, SECRET_KEY, options),
-            refreshToken: randToken.uid(256)
-        };
-        return result;
+    static sign(payload) {
+
+        return new Promise((resolve, reject) => {
+            
+            jwt.sign(payload, SECRET_KEY, options,
+                (err, token) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(token);
+                    }
+                }
+            );
+        });
     }
 
-    static verify(token) {
-        try {
-            return jwt.verify(token, SECRET_KEY);
-        } catch (err) {
-            switch (err.message) {
-                
-            }
-        }
+    static verify(accessToken) {
+        return new Promise((resolve, reject) => {
+            jwt.verify(accessToken, SECRET_KEY,
+                (err, decoded) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(decoded);
+                    }
+                }
+            )
+        });
     }
 
 }
