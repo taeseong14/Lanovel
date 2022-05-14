@@ -11,8 +11,11 @@ require('dotenv').config();
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const express = require('express');
+
 const jwt = require('./src/jwt');
 const sqlite3 = require('./src/Database');
+const authMW = require('./middleWares/auth');
+
 const app = express();
 
 app.use(express.json());
@@ -41,27 +44,20 @@ app.post('/api/overlap', (req, res) => {
     .catch(() => res.json({ status: 500, message: 'unexpected error occured' }));
 });
 
-app.post('/api/isLogined', (req, res) => {
-    
-});
-
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async (req, res) => {
 
     const { id, pw } = req.body;
 
     Database.GetUserById(id)
 
-    .then((error, row) => {
-
-        if (error) return res.json({ status: 500, message: 'unexpected error occured' });
+    .then(async (row, error) => {
+        
+        if (error) return res.json({ status: 500, message: 'unexpected error occured' }); 
         if (!row || row.pw !== pw) return res.json({ status: 400, message: 'invalid id or password' });
 
-        const { accessToken, refreshToken } = jwt.sign(row.uid);
+        const token = await jwt.sign({ id: row.id });
 
-        res.cookie('token', {
-            accessToken,
-            refreshToken
-        }, {
+        res.cookie('token', token, {
             httpOnly: true,
             signed: true,
             maxAge: 6048e5
@@ -87,15 +83,15 @@ app.post('/api/register', async (req, res) => {
     res.json({ status: 200, message: 'success' });
 });
 
-app.post('/api/upload', (req, res) => {
+app.post('/api/upload', authMW, (req, res) => {
 
 });
 
-app.post('/api/update', (req, res) => {
+app.post('/api/update', authMW, (req, res) => {
 
 });
 
-app.post('/api/tempsave', (req, res) => {
+app.post('/api/tempsave', authMW, (req, res) => {
 
 });
 
