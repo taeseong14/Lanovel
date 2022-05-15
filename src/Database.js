@@ -1,7 +1,5 @@
 const sqlite3 = require("sqlite3").verbose();
 
-console.log(1);
-
 class Database extends sqlite3.Database {
 
     constructor(path) {
@@ -34,8 +32,8 @@ class Database extends sqlite3.Database {
         this.run(`CREATE TABLE IF NOT EXISTS EPIS (
             eid  integer primary key autoincrement,
             nid  integer not null,
-            content text not null,
             name text not null,
+            path text not null,
             desc text,
             thum text,
             createdAt timestamp default current_timestamp
@@ -45,8 +43,8 @@ class Database extends sqlite3.Database {
             CREATE TABLE IF NOT EXISTS TEMP (
                 nid  integer primary key autoincrement,
                 uid  integer not null,
-                content text not null,
                 name text not null,
+                path text not null,
                 desc text,
                 thum text,
                 createdAt timestamp default current_timestamp
@@ -57,8 +55,8 @@ class Database extends sqlite3.Database {
 
         this.stmt.set('user', this.prepare('INSERT INTO USER (id, pw, name) VALUES(?, ?, ?)'));
         this.stmt.set('nove', this.prepare('INSERT INTO NOVE (uid, name, desc, thum) VALUES(?, ?, ?, ?)'));
-        this.stmt.set('epis', this.prepare('INSERT INTO EPIS (nid, name, content, desc, thum) VALUES(?, ?, ?, ?, ?)'));
-        this.stmt.set('temp', this.prepare('INSERT INTO TEMP (uid, name, content, desc, thum) VALUES(?, ?, ?, ?, ?)'));
+        this.stmt.set('epis', this.prepare('INSERT INTO EPIS (nid, name, path, desc, thum) VALUES(?, ?, ?, ?, ?)'));
+        this.stmt.set('temp', this.prepare('INSERT INTO TEMP (uid, name, path, desc, thum) VALUES(?, ?, ?, ?, ?)'));
     }
 
     Get(query, args) {

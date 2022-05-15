@@ -1,4 +1,4 @@
-const router = require('express').Router;
+const router = require('express').Router();
 const sqlite3 = require('../src/Database');
 const auth = require('../middleWares/auth');
 
