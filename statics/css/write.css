@@ -21,6 +21,8 @@
 
 #content-input {
     min-height: 250px;
+    max-height: 400px;
+    overflow-y: auto;
     box-sizing: border-box;
 }
 #content-input:focus {

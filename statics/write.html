@@ -7,18 +7,11 @@
     <title>Lanovel 글쓰기</title>
 </head>
 <body>
-    <header>
-        <h1>Lanovel</h1>
-        <nav>
-            <ul>
-                <li><a href="http://">ㅁ<!-- 검색아이콘 --></a></li>
-                <li id="search"><input type="search" id="search-input"></li>
-                <li><a href="http://">ㅁ<!-- 글쓰기아이콘 --></a></li>
-                <li><a href="http://">ㅁ<!-- 로그인아이콘 --></a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- header -->
     <main>
+        <div id="header">
+            <h1>Lanovel 글쓰기</h1>
+        </div>
         <div id="editor">
             <div id="title">
                 <form>
@@ -31,6 +24,7 @@
         </div>
         <button id="submit">제출</button>
     </main>
+    <script src="./js/header.js"></script>
     <script src="./js/fetch.js"></script>
     <script src="./js/write.js"></script>
 </body>
