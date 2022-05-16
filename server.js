@@ -20,7 +20,7 @@ app.use(cookieParser(process.env.COOKIE_KEY));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static('statics', {
-    extensions: [ 'html', 'htm' ]
+    extensions: [ 'html', 'txt' ]
 }));
 
 app.disable('x-powered-by');

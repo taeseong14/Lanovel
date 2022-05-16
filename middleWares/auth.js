@@ -10,14 +10,14 @@ module.exports = async function(req, res, next) {
     .catch(error => {
         if (error.name === 'TokenExpiredError') {
             return res.status(500).json({
-                code: 500,
+                status: 500,
                 message: 'token expired'
             });
         }
 
         if (error.name === 'JsonWebTokenError') {
             return res.status(500).json({
-                code: 500,
+                status: 500,
                 message: 'invalid token'
             });
         }
