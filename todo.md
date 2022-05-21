@@ -38,9 +38,9 @@
 
 ### 농보할일
 
-- [ ] favicon.ico
-- [ ] og:image
-- [ ] home, write(연필?), login? image
+- [X] favicon.ico
+- [X] og:image
+- [X] home, write(연필?), login? image
 - [ ] 조까요 이미지 (필요할시)
 
 ### 앱할일
