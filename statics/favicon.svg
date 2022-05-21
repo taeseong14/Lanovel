@@ -1,0 +1,44 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewbox="0 0 66 66" preserveAspectRatio="xMaxYMin meet">
+    <path d="
+    M 1 27
+    L 1 37
+    L 33 37
+    L 33 27
+    L 1 27
+    "
+    fill="#ff00a2"
+    stroke="#ff00a2"
+    stroke-width="1"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    />
+    <path d="
+    M 33 53
+    L 33 65
+    L 65 39
+    L 65 27
+    L 33 53
+    "
+    fill="#ffa200"
+    stroke="#ffa200"
+    stroke-width="1"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    />
+    <path d="
+    M 33 1
+    L 65 27
+    L 33 53
+    L 33 27
+    L 1 27
+    L 33 1
+    "
+    fill="black"
+    stroke="black"
+    stroke-width="1"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    />
+</svg>

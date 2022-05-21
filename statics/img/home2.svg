@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewbox="0 0 48 48" preserveAspectRatio="xMaxYMin meet">
+    <path d="
+    M 24 2
+    L 46 18
+    L 46 46
+    L 2 46
+    L 2 18
+    L 24 2
+    "
+    stroke="black"
+    stroke-width="4"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+    fill="black" />
+</svg>
