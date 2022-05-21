@@ -33,30 +33,16 @@ class Database extends sqlite3.Database {
             eid  integer primary key autoincrement,
             nid  integer not null,
             name text not null,
-            path text not null,
             desc text,
             thum text,
             createdAt timestamp default current_timestamp
         )`);
 
-        this.run(`
-            CREATE TABLE IF NOT EXISTS TEMP (
-                nid  integer primary key autoincrement,
-                uid  integer not null,
-                name text not null,
-                path text not null,
-                desc text,
-                thum text,
-                createdAt timestamp default current_timestamp
-            )
-        `);
-
         this.stmt = new Map();
 
         this.stmt.set('user', this.prepare('INSERT INTO USER (id, pw, name) VALUES(?, ?, ?)'));
         this.stmt.set('nove', this.prepare('INSERT INTO NOVE (uid, name, desc, thum) VALUES(?, ?, ?, ?)'));
-        this.stmt.set('epis', this.prepare('INSERT INTO EPIS (nid, name, path, desc, thum) VALUES(?, ?, ?, ?, ?)'));
-        this.stmt.set('temp', this.prepare('INSERT INTO TEMP (uid, name, path, desc, thum) VALUES(?, ?, ?, ?, ?)'));
+        this.stmt.set('epis', this.prepare('INSERT INTO EPIS (nid, name, desc, thum) VALUES(?, ?, ?, ?, ?)'));
     }
 
     Get(query, args) {
@@ -84,6 +70,14 @@ class Database extends sqlite3.Database {
         });
     }
 
+    GetNoveById(id) {
+        return new Promise((resolve, reject) => {
+            this.get('SELECT * FROM NOVE WHERE nid = ?', id, (err, row) => {
+                err ? reject(err) : resolve(row);
+            });
+        });
+    }
+
     GetUserById(id) {
         return new Promise((resolve, reject) => {
             this.get('SELECT * FROM USER WHERE id = ?', id, (err, row) => {
@@ -94,15 +88,23 @@ class Database extends sqlite3.Database {
 
     GetLastNoveId() {
         return new Promise((resolve, reject) => {
-            this.get('SELECT MAX(nid) as id FROM NOVE', (err, row) => {
+            this.get('SELECT count(*) as id FROM NOVE', (err, row) => {
                 err ? reject(err) : resolve(row.id);
+            });
+        });
+    }
+
+    GetLastEpisId() {
+        return new Promise((resolve, reject) => {
+            this.get('SELECT count(*) as id FROM EPIS', (err, row) => {
+                err ? reject(err) : resolve(row);
             });
         });
     }
 
     GetLastTempId() {
         return new Promise((resolve, reject) => {
-            this.get('SELECT MAX(nid) as id FROM TEMP', (err, row) => {
+            this.get('SELECT count(*) as id FROM TEMP', (err, row) => {
                 err ? reject(err) : resolve(row.id);
             });
         });

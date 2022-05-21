@@ -11,8 +11,8 @@ router.post('/', async (req, res) => {
 
     .then(async (row, error) => {
         
-        if (error) return res.json({ status: 500, message: 'uunexpected error occured', error }); 
-        if (!row || row.pw !== pw) return res.json({ status: 400, message: 'invalid id or password' });
+        if (error) return res.json({ err: 1, message: 'uunexpected error occured', error }); 
+        if (!row || row.pw !== pw) return res.json({ err: 1, message: 'invalid id or password' });
 
         const token = await jwt.sign({ id: row.id });
 
@@ -22,10 +22,10 @@ router.post('/', async (req, res) => {
             maxAge: 6048e5
         });
 
-        return res.json({ status: 200, message: '' });
+        return res.json({ err: 0, message: '' });
     })
 
-    .catch(e => { res.json({ status: 500, message: 'unexpected error occured' }); console.log(e) });
+    .catch(e => { res.json({ err: 1, message: 'unexpected error occured' }); console.log(e) });
 });
 
 module.exports = router;
