@@ -5,6 +5,8 @@ class Database extends sqlite3.Database {
     constructor(path) {
         super(path);
 
+        this.stmt = new Map();
+
         this.run(`
             CREATE TABLE IF NOT EXISTS USER (
                 uid  integer primary key autoincrement,
@@ -15,34 +17,32 @@ class Database extends sqlite3.Database {
                 desc text,
                 createdAt timestamp default current_timestamp
             )
-        `);
+        `, () => this.stmt.set('user', this.prepare('INSERT INTO USER (id, pw, name) VALUES(?, ?, ?)')));
 
         this.run(`
             CREATE TABLE IF NOT EXISTS NOVE (
                 nid  integer primary key autoincrement,
                 uid  integer not null,
-                name text not null,
+                title text not null,
                 desc text,
+                tags text,
                 thum text,
+                epis text,
                 createdAt timestamp default current_timestamp,
                 updatedAt timestamp default current_timestamp
             )
-        `);
+        `, () => this.stmt.set('nove', this.prepare('INSERT INTO NOVE (uid, title, desc, tags, thum, epis) VALUES(?, ?, ?, ?, ?, ?)')));
 
-        this.run(`CREATE TABLE IF NOT EXISTS EPIS (
-            eid  integer primary key autoincrement,
-            nid  integer not null,
-            name text not null,
-            desc text,
-            thum text,
-            createdAt timestamp default current_timestamp
-        )`);
-
-        this.stmt = new Map();
-
-        this.stmt.set('user', this.prepare('INSERT INTO USER (id, pw, name) VALUES(?, ?, ?)'));
-        this.stmt.set('nove', this.prepare('INSERT INTO NOVE (uid, name, desc, thum) VALUES(?, ?, ?, ?)'));
-        this.stmt.set('epis', this.prepare('INSERT INTO EPIS (nid, name, desc, thum) VALUES(?, ?, ?, ?, ?)'));
+        this.run(`
+            CREATE TABLE IF NOT EXISTS EPIS (
+                eid  integer primary key autoincrement,
+                nid  integer not null,
+                title text not null,
+                desc text,
+                thum text,
+                createdAt timestamp default current_timestamp
+            )
+        `, () => this.stmt.set('epis', this.prepare('INSERT INTO EPIS (nid, title, desc, thum) VALUES(?, ?, ?, ?)')));
     }
 
     Get(query, args) {
@@ -102,14 +102,6 @@ class Database extends sqlite3.Database {
         });
     }
 
-    GetLastTempId() {
-        return new Promise((resolve, reject) => {
-            this.get('SELECT count(*) as id FROM TEMP', (err, row) => {
-                err ? reject(err) : resolve(row.id);
-            });
-        });
-    }
-
 }
 
-module.exports = Database;
+module.exports = new Database('database.db');

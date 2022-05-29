@@ -103,6 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
+
+*.db-journal
 *.db
 
 statics/text/*.txt

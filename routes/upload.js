@@ -1,12 +1,10 @@
 const router = require('express').Router();
-const sqlite3 = require('../src/Database');
+const Database = require('../src/Database');
 const auth = require('../middleWares/auth');
 const user = require('../middleWares/user');
 const multer = require('multer');
 const fs = require('fs');
 const sharp = require('sharp');
-
-const Database = new sqlite3('database.db');
 
 const path = 'statics/uploads/';
 

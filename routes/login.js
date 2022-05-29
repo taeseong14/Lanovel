@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const sqlite3 = require('../src/Database');
-const Database = new sqlite3('database.db');
+const Database = require('../src/Database');
 const jwt = require('../src/jwt');
 
 router.post('/', async (req, res) => {
@@ -11,7 +10,7 @@ router.post('/', async (req, res) => {
 
     .then(async (row, error) => {
         
-        if (error) return res.json({ err: 1, message: 'uunexpected error occured', error }); 
+        if (error) return res.json({ err: 1, message: 'unexpected error occured', error }); 
         if (!row || row.pw !== pw) return res.json({ err: 1, message: 'invalid id or password' });
 
         const token = await jwt.sign({ id: row.id });

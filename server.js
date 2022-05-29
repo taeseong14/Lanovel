@@ -19,6 +19,14 @@ app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser(process.env.COOKIE_KEY));
 app.use(express.urlencoded({ extended: false }));
 
+app.set('view engine', 'ejs');
+app.set('views', './statics');
+
+app.use('/', (req, res, next) => {
+    if(req.url.endsWith('.ejs')) return res.redirect('/');
+    next();
+});
+
 app.use(express.static('statics', {
     extensions: [ 'html', 'txt' ]
 }));
@@ -29,11 +37,10 @@ app.use('/api/isLogined', require('./routes/isLogined'));
 app.use('/api/login', require('./routes/login'));
 app.use('/api/overlap', require('./routes/overlap'));
 app.use('/api/register', require('./routes/register'));
-app.use('/api/tempsave', require('./routes/tempsave'));
 app.use('/api/upload', require('./routes/upload'));
 app.use('/api/update', require('./routes/update'));
-app.use('/api/uploadText', require('./routes/uploadText'));
-app.use('/api/uploadTimg', require('./routes/uploadTimg'));
+
+app.use('/novel', require('./routes/novel'));
 
 app.get('*', (req, res) => res.redirect('/'));
 
