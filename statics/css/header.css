@@ -44,6 +44,11 @@ ul > li {
     align-items: center;
 }
 
+li img {
+    width: 20px;
+    margin: 0 15px;
+}
+
 ul #search {
     width: 200px;
     height: 30px;
