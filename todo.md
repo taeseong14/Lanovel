@@ -46,4 +46,3 @@
 ### 앱할일
 
 - [X] /novel/:hash 페이지 만들고 기초적인 틀짜기 단잔나우
-<!-- test commit for webhook -->
