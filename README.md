@@ -1,6 +1,6 @@
 # Lanovel
 
-소설올리는사이트?
+소설올리는사이트
 
 
 [깃헙](http://bgh.kro.kr/Lanovel)
