@@ -31,9 +31,9 @@
 ### 프론트엔드
 
 - GET /
-    - 소설누르면 /info/:id
+    - 소설누르면 /novel/:id
 
-- GET /info/:id
+- GET /novel/:id
     - 소설정보 및 편들
 
 - GET /viewer/:id/:epId
