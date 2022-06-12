@@ -24,6 +24,7 @@ document.querySelector('header img#header_icon').addEventListener('click', () =>
 // footer
 const footer = document.createElement('footer');
 footer.innerHTML = `안녕난푸터다`;
+if (document.querySelector('main').offsetHeight < window.innerHeight - 100) footer.classList.add('bottom');
 document.body.appendChild(footer);
 
 

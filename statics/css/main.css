@@ -23,9 +23,9 @@ h1#main_title {
     text-decoration-color: linear-gradient(to right, red, yellow);
 }
 
-img#main_img {
+/* img#main_img {
     width: ;
-}
+} */
 
 #main > p {
     font-size: 20px;

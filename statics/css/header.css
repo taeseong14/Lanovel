@@ -1,4 +1,3 @@
-
 :root {
     --header-height: 80px;
     --content-padding-r: 15%;
@@ -70,11 +69,13 @@ ul #search {
 
 footer {
     background-color: #eee;
-    position: absolute;
-    bottom: 0;
     width: 100%;
     height: 100px;
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
+}
+footer.bottom {
+    position: absolute;
+    bottom: 0;
 }
