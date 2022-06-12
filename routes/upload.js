@@ -6,7 +6,7 @@ const multer = require('multer');
 const fs = require('fs');
 const sharp = require('sharp');
 
-const path = 'statics/uploads/';
+const path = 'statics/uploads';
 
 const upload = multer({
     storage: multer.diskStorage({
@@ -22,20 +22,22 @@ const upload = multer({
 
 
 router.post('/', auth, user, upload, async (req, res) => {
-    sharp(req.file.path)
+    const nove = await Database.GetNoveById(nid);
+    const { id } = await Database.GetLastEpisId();
+    if (user.uid !== nove.uid) return res.json({ err: 1, message: 'you are not author' });
+    const { content, nid, title, desc } = req.body;
+    req.file.path && sharp(req.file.path)
         .resize({ width: 600 })
         .webp().withMetadata()
         .toBuffer((err, buf) => {
-            if (err) throw err;
+            if (err) return res.json({ err: 1, message: 'unexpected error occured' });
             fs.writeFileSync(req.file.path, buf);
         });
-    const { content, nid, title, desc } = req.body;
-    const nove = await Database.GetNoveById(nid);
-    const { id } = await Database.GetLastEpisId();
 
     if (!nove) return res.json({ err: 1, message: 'cannot find novel' });
-    fs.writeFileSync(`${path}${id}.txt`, content);
-    res.json({ err: 0, hash: id, message: '' });
+    fs.writeFileSync(`${path}/${nid}/${id}.txt`, content);
+    res.json({ err: 0, hash: id, message: 'success' });
+    Database.Insert('epis', [ nid, title, desc, req.file.path || "/img/default.webp" ]);
 });
 
 module.exports = router;
