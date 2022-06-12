@@ -32,8 +32,9 @@ app.use('/api/isLogined', require('./routes/isLogined'));
 app.use('/api/login', require('./routes/login'));
 app.use('/api/overlap', require('./routes/overlap'));
 app.use('/api/register', require('./routes/register'));
-app.use('/api/upload', require('./routes/upload'));
+// app.use('/api/upload', require('./routes/upload'));
 app.use('/api/update', require('./routes/update'));
+app.use('/api/epislist', require('./routes/epislist'));
 
 app.get('*', (req, res) => res.redirect('/'));
 

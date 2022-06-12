@@ -96,10 +96,14 @@ class Database extends sqlite3.Database {
 
     GetLastEpisId() {
         return new Promise((resolve, reject) => {
-            this.get('SELECT count(*) as id FROM EPIS', (err, row) => {
+            this.get('SELECT count(*) as id FROM EPIS WHERE nid = ?', (err, row) => {
                 err ? reject(err) : resolve(row);
             });
         });
+    }
+
+    GetEpisById(nid) {
+        return this.All('SELECT * FROM EPIS WHERE nid = ?', nid);
     }
 
 }
