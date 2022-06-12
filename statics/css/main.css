@@ -1,3 +1,36 @@
+
+main {
+    box-sizing: border-box;
+}
+
+#main {
+    width: 100%;
+    height: calc(90vh - var(--header-height));
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 24px;
+    padding: 0px var(--content-padding-r);
+    box-sizing: border-box;
+    color: white;
+}
+
+h1#main_title {
+    margin: 0;
+    font-size: 64px;
+    text-decoration: underline;
+    text-decoration-color: linear-gradient(to right, red, yellow);
+}
+
+img#main_img {
+    width: ;
+}
+
+#main > p {
+    font-size: 20px;
+}
+
 #novels {
     padding-top: 30px;
     align-content: center;
@@ -19,6 +52,7 @@
     overflow-x: scroll;
     overflow-y: hidden;
 }
+
 .novel {
     display: flex;
     flex-direction: column;

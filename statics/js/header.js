@@ -1,14 +1,12 @@
 // header
 const header = document.createElement('header');
 header.innerHTML = `
-    <h1>Lanovel</h1>
+<img id="header_icon" src="./img/icon_dark.svg" alt="Home">
     <nav>
-        <ul>
-            <li><a href="/"><img src="./img/home1.svg" alt="홈"></a></li>
-            <li id="search"><form id="search-form"><input type="search" id="search-input" placeholder="검색"></form></li>
-            <li><a href="/write"><img src="./img/write1.svg" alt="글쓰기"></a></li>
-            <li><a href="/login"><img src="./img/signin1.svg" alt="로그인"></a></li>
-        </ul>
+        <a href="/"><img src="./img/home2.svg" alt="홈"></a>
+        <form id="search-form"><input type="search" id="search-input" placeholder="검색"></form>
+        <a href="/write"><img src="./img/write2.svg" alt="글쓰기"></a>
+        <a href="/login"><img src="./img/signin2.svg" alt="로그인"></a>
     </nav>
 `;
 document.body.prepend(header);
@@ -19,7 +17,7 @@ header.querySelector('form').addEventListener('submit', (e) => {
     console.log(search.value);
     search.value = '';
 });
-document.querySelector('header h1').addEventListener('click', () => {
+document.querySelector('header img#header_icon').addEventListener('click', () => {
     location.href = '/';
 });
 
