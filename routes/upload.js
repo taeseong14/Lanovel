@@ -22,10 +22,10 @@ const upload = multer({
 
 
 router.post('/', auth, user, upload, async (req, res) => {
+    const { content, nid, title, desc } = req.body;
     const nove = await Database.GetNoveById(nid);
     const { id } = await Database.GetLastEpisId();
     if (user.uid !== nove.uid) return res.json({ err: 1, message: 'you are not author' });
-    const { content, nid, title, desc } = req.body;
     req.file.path && sharp(req.file.path)
         .resize({ width: 600 })
         .webp().withMetadata()
