@@ -1,0 +1,33 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100% - var(--header-height) - var(--footer-height));
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+#login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 40%;
+    height: 85%;
+    border: 1px solid;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+#login input {
+    display: block;
+    margin: 0 auto;
+    
+}
+
+main a {
+    display: flex;
+    align-items: center;
+    height: 15%;
+}

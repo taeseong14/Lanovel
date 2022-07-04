@@ -2,18 +2,20 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/login.css">
     <title>Lanovel</title>
 </head>
 <body>
     <main>
-    <form>
-        <input type="text" name="username" id="username" placeholder="username">
-        <input type="text">
-        <button>로그인</button>
-    </form>
-    <a href="/register">회원가입</a>
+        <form id="login">
+            <input type="text" name="id" id="id" placeholder="id">
+            <input type="password" name="pw" id="pw" placeholder="password">
+            <button>로그인</button>
+        </form>
+        <a href="/register">회원가입</a>
+    </main>
     <script src="./js/header.js"></script>
 </body>
 </html>

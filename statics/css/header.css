@@ -1,5 +1,6 @@
 :root {
     --header-height: 80px;
+    --footer-height: 100px;
     --content-padding-r: 15%;
 }
 
@@ -23,9 +24,6 @@ header {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    position: fixed;
-    top: 0;
-    left: 0;
 }
 
 img#header_icon {
@@ -70,7 +68,7 @@ ul #search {
 footer {
     background-color: #eee;
     width: 100%;
-    height: 100px;
+    height: var(--footer-height);
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
